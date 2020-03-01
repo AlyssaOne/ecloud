@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjfu.ecloud.mapper.VirtualFolderMapper">
+  <resultMap id="BaseResultMap" type="com.bjfu.ecloud.entity.VirtualFolder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_folder_id" jdbcType="INTEGER" property="parentFolderId" />
+    <result column="folder_name" jdbcType="VARCHAR" property="folderName" />
+    <result column="folder_status" jdbcType="CHAR" property="folderStatus" />
+    <result column="folder_size" jdbcType="VARCHAR" property="folderSize" />
+    <result column="folder_recent_update" jdbcType="TIMESTAMP" property="folderRecentUpdate" />
+    <result column="folder_create" jdbcType="TIMESTAMP" property="folderCreate" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_folder_id, folder_name, folder_status, folder_size, folder_recent_update, 
+    folder_create, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from virtual_folder
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from virtual_folder
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
+    insert into virtual_folder (id, parent_folder_id, folder_name, 
+      folder_status, folder_size, folder_recent_update, 
+      folder_create, user_id)
+    values (#{id,jdbcType=INTEGER}, #{parentFolderId,jdbcType=INTEGER}, #{folderName,jdbcType=VARCHAR}, 
+      #{folderStatus,jdbcType=CHAR}, #{folderSize,jdbcType=VARCHAR}, #{folderRecentUpdate,jdbcType=TIMESTAMP}, 
+      #{folderCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
+    insert into virtual_folder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentFolderId != null">
+        parent_folder_id,
+      </if>
+      <if test="folderName != null">
+        folder_name,
+      </if>
+      <if test="folderStatus != null">
+        folder_status,
+      </if>
+      <if test="folderSize != null">
+        folder_size,
+      </if>
+      <if test="folderRecentUpdate != null">
+        folder_recent_update,
+      </if>
+      <if test="folderCreate != null">
+        folder_create,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentFolderId != null">
+        #{parentFolderId,jdbcType=INTEGER},
+      </if>
+      <if test="folderName != null">
+        #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderStatus != null">
+        #{folderStatus,jdbcType=CHAR},
+      </if>
+      <if test="folderSize != null">
+        #{folderSize,jdbcType=VARCHAR},
+      </if>
+      <if test="folderRecentUpdate != null">
+        #{folderRecentUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="folderCreate != null">
+        #{folderCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
+    update virtual_folder
+    <set>
+      <if test="parentFolderId != null">
+        parent_folder_id = #{parentFolderId,jdbcType=INTEGER},
+      </if>
+      <if test="folderName != null">
+        folder_name = #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderStatus != null">
+        folder_status = #{folderStatus,jdbcType=CHAR},
+      </if>
+      <if test="folderSize != null">
+        folder_size = #{folderSize,jdbcType=VARCHAR},
+      </if>
+      <if test="folderRecentUpdate != null">
+        folder_recent_update = #{folderRecentUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="folderCreate != null">
+        folder_create = #{folderCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
+    update virtual_folder
+    set parent_folder_id = #{parentFolderId,jdbcType=INTEGER},
+      folder_name = #{folderName,jdbcType=VARCHAR},
+      folder_status = #{folderStatus,jdbcType=CHAR},
+      folder_size = #{folderSize,jdbcType=VARCHAR},
+      folder_recent_update = #{folderRecentUpdate,jdbcType=TIMESTAMP},
+      folder_create = #{folderCreate,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

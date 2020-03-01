@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjfu.ecloud.mapper.PhysicalFileMapper">
+  <resultMap id="BaseResultMap" type="com.bjfu.ecloud.entity.PhysicalFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="physical_file_name" jdbcType="VARCHAR" property="physicalFileName" />
+    <result column="hadoop_path" jdbcType="VARCHAR" property="hadoopPath" />
+    <result column="physical_file_status" jdbcType="CHAR" property="physicalFileStatus" />
+    <result column="physical_file_size" jdbcType="VARCHAR" property="physicalFileSize" />
+    <result column="physical_file_type" jdbcType="CHAR" property="physicalFileType" />
+    <result column="physical_file_recent_update" jdbcType="TIMESTAMP" property="physicalFileRecentUpdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, physical_file_name, hadoop_path, physical_file_status, physical_file_size, physical_file_type, 
+    physical_file_recent_update
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from physical_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from physical_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.PhysicalFile">
+    insert into physical_file (id, physical_file_name, hadoop_path, 
+      physical_file_status, physical_file_size, physical_file_type, 
+      physical_file_recent_update)
+    values (#{id,jdbcType=INTEGER}, #{physicalFileName,jdbcType=VARCHAR}, #{hadoopPath,jdbcType=VARCHAR}, 
+      #{physicalFileStatus,jdbcType=CHAR}, #{physicalFileSize,jdbcType=VARCHAR}, #{physicalFileType,jdbcType=CHAR}, 
+      #{physicalFileRecentUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.ecloud.entity.PhysicalFile">
+    insert into physical_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="physicalFileName != null">
+        physical_file_name,
+      </if>
+      <if test="hadoopPath != null">
+        hadoop_path,
+      </if>
+      <if test="physicalFileStatus != null">
+        physical_file_status,
+      </if>
+      <if test="physicalFileSize != null">
+        physical_file_size,
+      </if>
+      <if test="physicalFileType != null">
+        physical_file_type,
+      </if>
+      <if test="physicalFileRecentUpdate != null">
+        physical_file_recent_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="physicalFileName != null">
+        #{physicalFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="hadoopPath != null">
+        #{hadoopPath,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalFileStatus != null">
+        #{physicalFileStatus,jdbcType=CHAR},
+      </if>
+      <if test="physicalFileSize != null">
+        #{physicalFileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalFileType != null">
+        #{physicalFileType,jdbcType=CHAR},
+      </if>
+      <if test="physicalFileRecentUpdate != null">
+        #{physicalFileRecentUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.ecloud.entity.PhysicalFile">
+    update physical_file
+    <set>
+      <if test="physicalFileName != null">
+        physical_file_name = #{physicalFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="hadoopPath != null">
+        hadoop_path = #{hadoopPath,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalFileStatus != null">
+        physical_file_status = #{physicalFileStatus,jdbcType=CHAR},
+      </if>
+      <if test="physicalFileSize != null">
+        physical_file_size = #{physicalFileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalFileType != null">
+        physical_file_type = #{physicalFileType,jdbcType=CHAR},
+      </if>
+      <if test="physicalFileRecentUpdate != null">
+        physical_file_recent_update = #{physicalFileRecentUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.ecloud.entity.PhysicalFile">
+    update physical_file
+    set physical_file_name = #{physicalFileName,jdbcType=VARCHAR},
+      hadoop_path = #{hadoopPath,jdbcType=VARCHAR},
+      physical_file_status = #{physicalFileStatus,jdbcType=CHAR},
+      physical_file_size = #{physicalFileSize,jdbcType=VARCHAR},
+      physical_file_type = #{physicalFileType,jdbcType=CHAR},
+      physical_file_recent_update = #{physicalFileRecentUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

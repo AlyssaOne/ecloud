@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjfu.ecloud.mapper.ShareMapper">
+  <resultMap id="BaseResultMap" type="com.bjfu.ecloud.entity.Share">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="physical_file_id" jdbcType="INTEGER" property="physicalFileId" />
+    <result column="sender_id" jdbcType="INTEGER" property="senderId" />
+    <result column="reciever_id" jdbcType="INTEGER" property="recieverId" />
+    <result column="share_file_status" jdbcType="CHAR" property="shareFileStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, physical_file_id, sender_id, reciever_id, share_file_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from share
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from share
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.Share">
+    insert into share (id, physical_file_id, sender_id, 
+      reciever_id, share_file_status)
+    values (#{id,jdbcType=INTEGER}, #{physicalFileId,jdbcType=INTEGER}, #{senderId,jdbcType=INTEGER}, 
+      #{recieverId,jdbcType=INTEGER}, #{shareFileStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjfu.ecloud.entity.Share">
+    insert into share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="physicalFileId != null">
+        physical_file_id,
+      </if>
+      <if test="senderId != null">
+        sender_id,
+      </if>
+      <if test="recieverId != null">
+        reciever_id,
+      </if>
+      <if test="shareFileStatus != null">
+        share_file_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="physicalFileId != null">
+        #{physicalFileId,jdbcType=INTEGER},
+      </if>
+      <if test="senderId != null">
+        #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="recieverId != null">
+        #{recieverId,jdbcType=INTEGER},
+      </if>
+      <if test="shareFileStatus != null">
+        #{shareFileStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjfu.ecloud.entity.Share">
+    update share
+    <set>
+      <if test="physicalFileId != null">
+        physical_file_id = #{physicalFileId,jdbcType=INTEGER},
+      </if>
+      <if test="senderId != null">
+        sender_id = #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="recieverId != null">
+        reciever_id = #{recieverId,jdbcType=INTEGER},
+      </if>
+      <if test="shareFileStatus != null">
+        share_file_status = #{shareFileStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjfu.ecloud.entity.Share">
+    update share
+    set physical_file_id = #{physicalFileId,jdbcType=INTEGER},
+      sender_id = #{senderId,jdbcType=INTEGER},
+      reciever_id = #{recieverId,jdbcType=INTEGER},
+      share_file_status = #{shareFileStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
