@@ -1,4 +1,4 @@
 package com.bjfu.ecloud.util;
 
-public class JwtTokenProvider {
+public class JwtTokenUtils {
 }

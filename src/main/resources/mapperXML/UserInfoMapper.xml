@@ -7,9 +7,10 @@
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="user_role" jdbcType="CHAR" property="userRole" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, tel, email, pwd
+    id, username, tel, email, pwd, user_role
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.bjfu.ecloud.entity.UserInfo">
     insert into user_info (id, username, tel, 
-      email, pwd)
+      email, pwd, user_role)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR})
+      #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{userRole,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjfu.ecloud.entity.UserInfo">
     insert into user_info
@@ -45,6 +46,9 @@
       <if test="pwd != null">
         pwd,
       </if>
+      <if test="userRole != null">
+        user_role,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,6 +65,9 @@
       </if>
       <if test="pwd != null">
         #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        #{userRole,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +86,9 @@
       <if test="pwd != null">
         pwd = #{pwd,jdbcType=VARCHAR},
       </if>
+      <if test="userRole != null">
+        user_role = #{userRole,jdbcType=CHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +97,8 @@
     set username = #{username,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR}
+      pwd = #{pwd,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

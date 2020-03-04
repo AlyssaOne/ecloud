@@ -11,6 +11,8 @@ public class UserInfo {
 
     private String pwd;
 
+    private String userRole;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class UserInfo {
 
     public void setPwd(String pwd) {
         this.pwd = pwd == null ? null : pwd.trim();
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole == null ? null : userRole.trim();
     }
 }
