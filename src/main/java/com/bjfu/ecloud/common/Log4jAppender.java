@@ -3,6 +3,7 @@ package com.bjfu.ecloud.common;
 import org.apache.log4j.DailyRollingFileAppender;
 import org.apache.log4j.Priority;
 
+//unused
 public class Log4jAppender extends DailyRollingFileAppender {
 
     @Override

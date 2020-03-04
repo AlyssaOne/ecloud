@@ -18,11 +18,17 @@
     from user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where username = #{username, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bjfu.ecloud.entity.UserInfo">
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.bjfu.ecloud.entity.UserInfo">
     insert into user_info (id, username, tel, 
       email, pwd, user_role)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
