@@ -10,16 +10,20 @@
     <result column="folder_recent_update" jdbcType="TIMESTAMP" property="folderRecentUpdate" />
     <result column="folder_create" jdbcType="TIMESTAMP" property="folderCreate" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="virtual_path" jdbcType="VARCHAR" property="virtualPath" />
   </resultMap>
   <sql id="Base_Column_List">
     id, parent_folder_id, folder_name, folder_status, folder_size, folder_recent_update, 
-    folder_create, user_id
+    folder_create, user_id, virtual_path
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from virtual_folder
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByParentVirtualFolderId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select * from virtual_folder where parent_folder_id = #{id, jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from virtual_folder
@@ -28,10 +32,12 @@
   <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
     insert into virtual_folder (id, parent_folder_id, folder_name, 
       folder_status, folder_size, folder_recent_update, 
-      folder_create, user_id)
+      folder_create, user_id, virtual_path
+      )
     values (#{id,jdbcType=INTEGER}, #{parentFolderId,jdbcType=INTEGER}, #{folderName,jdbcType=VARCHAR}, 
       #{folderStatus,jdbcType=CHAR}, #{folderSize,jdbcType=VARCHAR}, #{folderRecentUpdate,jdbcType=TIMESTAMP}, 
-      #{folderCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER})
+      #{folderCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, #{virtualPath,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
     insert into virtual_folder
@@ -60,6 +66,9 @@
       <if test="userId != null">
         user_id,
       </if>
+      <if test="virtualPath != null">
+        virtual_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -85,6 +94,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="virtualPath != null">
+        #{virtualPath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -112,6 +124,9 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="virtualPath != null">
+        virtual_path = #{virtualPath,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -123,7 +138,8 @@
       folder_size = #{folderSize,jdbcType=VARCHAR},
       folder_recent_update = #{folderRecentUpdate,jdbcType=TIMESTAMP},
       folder_create = #{folderCreate,jdbcType=TIMESTAMP},
-      user_id = #{userId,jdbcType=INTEGER}
+      user_id = #{userId,jdbcType=INTEGER},
+      virtual_path = #{virtualPath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

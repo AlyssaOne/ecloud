@@ -19,6 +19,8 @@ public class VirtualFolder {
 
     private Integer userId;
 
+    private String virtualPath;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class VirtualFolder {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getVirtualPath() {
+        return virtualPath;
+    }
+
+    public void setVirtualPath(String virtualPath) {
+        this.virtualPath = virtualPath == null ? null : virtualPath.trim();
     }
 }

@@ -23,6 +23,9 @@
     from virtual_file
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByParentVirtualFolderId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select * from virtual_file where virtual_folder_id = #{id, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from virtual_file
     where id = #{id,jdbcType=INTEGER}

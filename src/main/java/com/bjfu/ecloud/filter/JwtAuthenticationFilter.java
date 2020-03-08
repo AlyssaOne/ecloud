@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPwd(), new ArrayList<>())
             );
-        } catch (IOException e) {
+        } catch (Exception e) { //记得改回IOException
             e.printStackTrace();
             return null;
         }
@@ -69,12 +69,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         for (GrantedAuthority authority : authorities){
             role = authority.getAuthority();
         }
-
         String token = JwtTokenUtils.createToken(jwtUser.getUsername(), role, isRemember);
+
+        JSONObject json = new JSONObject();
+        json.put("success", true);
+        json.put("username", jwtUser.getUsername());
+        json.put("token", token);
+        byte[] body = new ObjectMapper().writeValueAsBytes(json);
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
         response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+        response.getOutputStream().write(body);
     }
 
     // 这是验证失败时候调用的方法
