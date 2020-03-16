@@ -1,5 +1,6 @@
 package com.bjfu.ecloud.service.impl;
 
+import com.bjfu.ecloud.entity.VirtualFolder;
 import com.bjfu.ecloud.mapper.VirtualFolderMapper;
 import com.bjfu.ecloud.service.VirtualFolderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,23 @@ public class VirtualFolderServiceImpl implements VirtualFolderService {
     private VirtualFolderMapper virtualFolderMapper;
 
     @Override
+    public VirtualFolder selectByPrimaryKey(Integer id) {
+        return virtualFolderMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public VirtualFolder selectRootByUserId(Integer userId) {
+        return virtualFolderMapper.selectRootByUserId(userId);
+    }
+
+
+    @Override
     public List<HashMap> selectByParentVirtualFolderId(Integer id) {
         return virtualFolderMapper.selectByParentVirtualFolderId(id);
+    }
+
+    @Override
+    public List<HashMap> selectRootFoldersByUserId(Integer userId) {
+        return virtualFolderMapper.selectRootFoldersByUserId(userId);
     }
 }

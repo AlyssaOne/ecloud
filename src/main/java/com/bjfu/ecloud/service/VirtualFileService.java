@@ -6,4 +6,6 @@ import java.util.List;
 public interface VirtualFileService {
 
     List<HashMap> selectByParentVirtualFolderId(Integer id);
+
+    List<HashMap> selectRootFilesByUserId(Integer userId);
 }

@@ -18,4 +18,9 @@ public class VirtualFileServiceImpl implements VirtualFileService {
     public List<HashMap> selectByParentVirtualFolderId(Integer id) {
         return virtualFileMapper.selectByParentVirtualFolderId(id);
     }
+
+    @Override
+    public List<HashMap> selectRootFilesByUserId(Integer userId) {
+        return virtualFileMapper.selectRootFilesByUserId(userId);
+    }
 }

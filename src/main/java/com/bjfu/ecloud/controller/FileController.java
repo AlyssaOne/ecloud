@@ -2,6 +2,9 @@ package com.bjfu.ecloud.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bjfu.ecloud.entity.UserInfo;
+import com.bjfu.ecloud.entity.VirtualFolder;
+import com.bjfu.ecloud.service.UserInfoService;
 import com.bjfu.ecloud.service.VirtualFileService;
 import com.bjfu.ecloud.service.VirtualFolderService;
 import com.bjfu.ecloud.util.JwtTokenUtils;
@@ -23,14 +26,33 @@ public class FileController {
     @Autowired
     private VirtualFileService virtualFileService;
 
-    @PostMapping("/onload")
+    @Autowired
+    private UserInfoService userInfoService;
+
+    /**
+     * 初始化页面时调用初始化方法，返回根目录下的文件
+     * @param params 包含token
+     * @return
+     */
+    @PostMapping("/files_onload")
     @ResponseBody
     public JSONObject onLoad(@RequestBody JSONObject params){
         String token = (String) params.get("token");
         String username = JwtTokenUtils.getUsername(token);
 
+        UserInfo user = userInfoService.selectByUsername(username);
+
+        VirtualFolder virtualFolder = virtualFolderService.selectRootByUserId(user.getId());
+
+        List<HashMap> files = virtualFileService.selectRootFilesByUserId(user.getId());
+        List<HashMap> folders = virtualFolderService.selectRootFoldersByUserId(user.getId());
+
         JSONObject res = new JSONObject();
         res.put("success", true);
+        res.put("folders", folders);
+        res.put("files", files);
+        res.put("parent_id", virtualFolder.getId());
+        res.put("parent_name", virtualFolder.getFolderName());
         return res;
     }
 
@@ -49,15 +71,19 @@ public class FileController {
         String token = (String) params.get("token");
         String username = JwtTokenUtils.getUsername(token);
 //        System.out.println(username);
-        Integer folder_id = Integer.parseInt(params.getString("folder_id"));
+        Integer folderId = Integer.parseInt(params.getString("folder_id"));
 
-        List<HashMap> folders = virtualFolderService.selectByParentVirtualFolderId(folder_id);
-        List<HashMap> files = virtualFileService.selectByParentVirtualFolderId(folder_id);
+        VirtualFolder virtualFolder = virtualFolderService.selectByPrimaryKey(folderId);
+
+        List<HashMap> folders = virtualFolderService.selectByParentVirtualFolderId(folderId);
+        List<HashMap> files = virtualFileService.selectByParentVirtualFolderId(folderId);
 
         JSONObject res = new JSONObject();
         res.put("success", true);
         res.put("folders", folders);
         res.put("files", files);
+        res.put("parent_id", virtualFolder.getId());
+        res.put("parent_name", virtualFolder.getFolderName());
         return res;
     }
 
