@@ -32,7 +32,7 @@ public class FileController {
     /**
      * 初始化页面时调用初始化方法，返回根目录下的文件
      * @param params 包含token
-     * @return
+     * @return 初始化页面所需数据
      */
     @PostMapping("/files_onload")
     @ResponseBody
