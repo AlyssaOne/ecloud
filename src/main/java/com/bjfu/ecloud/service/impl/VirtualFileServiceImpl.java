@@ -1,5 +1,6 @@
 package com.bjfu.ecloud.service.impl;
 
+import com.bjfu.ecloud.entity.VirtualFile;
 import com.bjfu.ecloud.mapper.VirtualFileMapper;
 import com.bjfu.ecloud.service.VirtualFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class VirtualFileServiceImpl implements VirtualFileService {
     @Override
     public List<HashMap> selectRootFilesByUserId(Integer userId) {
         return virtualFileMapper.selectRootFilesByUserId(userId);
+    }
+
+    @Override
+    public int insert(VirtualFile record) {
+        return virtualFileMapper.insert(record);
     }
 }

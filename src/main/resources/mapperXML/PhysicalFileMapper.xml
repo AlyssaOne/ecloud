@@ -24,7 +24,7 @@
     delete from physical_file
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bjfu.ecloud.entity.PhysicalFile">
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.PhysicalFile" useGeneratedKeys="true" keyProperty="id">
     insert into physical_file (id, physical_file_name, hadoop_path, 
       physical_file_status, physical_file_size, physical_file_type, 
       physical_file_recent_update)

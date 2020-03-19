@@ -34,7 +34,7 @@
     delete from virtual_file
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFile">
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFile" useGeneratedKeys="true" keyProperty="id">
     insert into virtual_file (id, physical_file_id, user_id, 
       virtual_folder_id, file_name, virtual_file_status, 
       file_size, file_type, file_recent_update, 

@@ -1,8 +1,8 @@
 package com.bjfu.ecloud.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bjfu.ecloud.entity.security.JwtUser;
-import com.bjfu.ecloud.entity.security.LoginUser;
+import com.bjfu.ecloud.common.security.JwtUser;
+import com.bjfu.ecloud.common.security.LoginUser;
 import com.bjfu.ecloud.util.JwtTokenUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.activation.MimeTypeParameterList;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

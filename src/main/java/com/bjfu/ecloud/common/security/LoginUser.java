@@ -1,4 +1,4 @@
-package com.bjfu.ecloud.entity.security;
+package com.bjfu.ecloud.common.security;
 
 public class LoginUser {
 

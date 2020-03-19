@@ -4,7 +4,7 @@ import org.omg.CORBA.INTERNAL;
 
 import java.util.ArrayList;
 
-public final class VirtualFileTypeUtils {
+public final class FileTypeUtils {
     public static String FILE_TYPE_OTHERS = "0";
     public static String FILE_TYPE_DOCUMENT = "1";
     public static String FILE_TYPE_PICTURE = "2";

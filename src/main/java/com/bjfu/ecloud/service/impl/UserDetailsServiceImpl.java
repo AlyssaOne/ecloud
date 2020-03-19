@@ -1,7 +1,7 @@
 package com.bjfu.ecloud.service.impl;
 
 import com.bjfu.ecloud.entity.UserInfo;
-import com.bjfu.ecloud.entity.security.JwtUser;
+import com.bjfu.ecloud.common.security.JwtUser;
 import com.bjfu.ecloud.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
