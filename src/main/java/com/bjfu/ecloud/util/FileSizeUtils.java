@@ -2,7 +2,7 @@ package com.bjfu.ecloud.util;
 
 import java.text.DecimalFormat;
 
-public class FileSizeUtil {
+public class FileSizeUtils {
 
     private static final long KB = 1024;
     private static final long MB = 1048576;

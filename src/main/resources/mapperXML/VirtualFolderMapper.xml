@@ -37,7 +37,7 @@
     delete from virtual_folder
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFolder">
+  <insert id="insert" parameterType="com.bjfu.ecloud.entity.VirtualFolder" useGeneratedKeys="true" keyProperty="id">
     insert into virtual_folder (id, parent_folder_id, folder_name, 
       folder_status, folder_size, folder_recent_update, 
       folder_create, user_id, virtual_path

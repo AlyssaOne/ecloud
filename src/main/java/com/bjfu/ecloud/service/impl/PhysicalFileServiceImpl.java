@@ -13,6 +13,11 @@ public class PhysicalFileServiceImpl implements PhysicalFileService {
     PhysicalFileMapper physicalFileMapper;
 
     @Override
+    public PhysicalFile selectByPrimaryKey(Integer id) {
+        return physicalFileMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public int insert(PhysicalFile record) {
         return physicalFileMapper.insert(record);
     }

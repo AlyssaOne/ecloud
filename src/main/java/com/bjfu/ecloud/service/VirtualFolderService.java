@@ -14,4 +14,10 @@ public interface VirtualFolderService {
     List<HashMap> selectByParentVirtualFolderId(Integer id);
 
     List<HashMap> selectRootFoldersByUserId(Integer userId);
+
+    int insert(VirtualFolder record);
+
+    int updateByPrimaryKeySelective(VirtualFolder record);
+
+    int deleteByPrimaryKey(Integer id);
 }

@@ -11,5 +11,11 @@ public interface VirtualFileService {
 
     List<HashMap> selectRootFilesByUserId(Integer userId);
 
+    VirtualFile selectByPrimaryKey(Integer id);
+
     int insert(VirtualFile record);
+
+    int updateByPrimaryKeySelective(VirtualFile record);
+
+    int deleteByPrimaryKey(Integer id);
 }

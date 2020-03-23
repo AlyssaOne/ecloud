@@ -26,7 +26,22 @@ public class VirtualFileServiceImpl implements VirtualFileService {
     }
 
     @Override
+    public VirtualFile selectByPrimaryKey(Integer id) {
+        return virtualFileMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public int insert(VirtualFile record) {
         return virtualFileMapper.insert(record);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(VirtualFile record) {
+        return virtualFileMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return virtualFileMapper.deleteByPrimaryKey(id);
     }
 }

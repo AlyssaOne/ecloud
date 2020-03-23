@@ -35,4 +35,21 @@ public class VirtualFolderServiceImpl implements VirtualFolderService {
     public List<HashMap> selectRootFoldersByUserId(Integer userId) {
         return virtualFolderMapper.selectRootFoldersByUserId(userId);
     }
+
+    @Override
+    public int insert(VirtualFolder record) {
+        return virtualFolderMapper.insert(record);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(VirtualFolder record) {
+        return virtualFolderMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return virtualFolderMapper.deleteByPrimaryKey(id);
+    }
+
+
 }
