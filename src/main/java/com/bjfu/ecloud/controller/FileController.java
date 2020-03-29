@@ -237,7 +237,7 @@ public class FileController {
     /**
      * 暂不支持文件夹下载
      */
-    public void downloadFiles(String fileId, boolean isFolder, HttpServletResponse response, HttpServletRequest request){
+    public void downloadFiles(String fileId, boolean isFolder, HttpServletResponse response, HttpServletRequest request) {
         VirtualFile virtualFile = virtualFileService.selectByPrimaryKey(Integer.valueOf(fileId));
         System.out.println(virtualFile);
         PhysicalFile physicalFile = physicalFileService.selectByPrimaryKey(virtualFile.getPhysicalFileId());
@@ -248,7 +248,7 @@ public class FileController {
         response.setHeader("Content-Disposition",
                 "attachment;");
         try {
-            String fileDestination = physicalFile.getHadoopPath()+"/"+physicalFile.getPhysicalFileName();
+            String fileDestination = physicalFile.getHadoopPath() + "/" + physicalFile.getPhysicalFileName();
             System.out.println(fileDestination);
             FileDownloadUtils.writeBytes(fileDestination, response.getOutputStream());
         } catch (IOException e) {
@@ -258,25 +258,25 @@ public class FileController {
 
     @GetMapping("/rename")
     @ResponseBody
-    public JSONObject renameFile(@RequestParam("type") String type, @RequestParam("originId") Integer originId, @RequestParam("originName") String originName){
+    public JSONObject renameFile(@RequestParam("type") String type, @RequestParam("originId") Integer originId, @RequestParam("originName") String originName) {
         JSONObject res = new JSONObject();
 
 //        String type = (String) params.get("type");
 //        Integer originId = (Integer) params.get("originId");
 //        String originName = (String) params.get("originName");
-        if(type.trim().equals("folder")){
+        if (type.trim().equals("folder")) {
             VirtualFolder virtualFolder = new VirtualFolder();
             virtualFolder.setId(originId);
             virtualFolder.setFolderName(originName);
             virtualFolderService.updateByPrimaryKeySelective(virtualFolder);
-            System.out.println(virtualFolder.getFolderName()+" "+virtualFolder.getVirtualPath());
-        }else if(type.trim().equals("file")){
+            System.out.println(virtualFolder.getFolderName() + " " + virtualFolder.getVirtualPath());
+        } else if (type.trim().equals("file")) {
             VirtualFile virtualFile = new VirtualFile();
             virtualFile.setId(originId);
             virtualFile.setFileName(originName);
             virtualFileService.updateByPrimaryKeySelective(virtualFile);
-            System.out.println(virtualFile.getFileName()+" "+virtualFile.getFileSize());
-        }else {
+            System.out.println(virtualFile.getFileName() + " " + virtualFile.getFileSize());
+        } else {
             res.put("success", false);
             return res;
         }
@@ -286,17 +286,17 @@ public class FileController {
 
     @DeleteMapping("/file/{type}/{id}")
     @ResponseBody
-    public JSONObject deleteFile(@PathVariable("type") String type, @PathVariable("id") Integer id){
+    public JSONObject deleteFile(@PathVariable("type") String type, @PathVariable("id") Integer id) {
         JSONObject res = new JSONObject();
 
 //        String type = (String) params.get("type");
 //        Integer originId = (Integer) params.get("originId");
 //        String originName = (String) params.get("originName");
-        if(type.trim().equals("folder")){
+        if (type.trim().equals("folder")) {
             virtualFolderService.deleteByPrimaryKey(id);
-        }else if(type.trim().equals("file")){
+        } else if (type.trim().equals("file")) {
             virtualFileService.deleteByPrimaryKey(id);
-        }else {
+        } else {
             res.put("success", false);
             return res;
         }
